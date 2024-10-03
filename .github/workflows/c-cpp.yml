@@ -18,16 +18,16 @@ jobs:
 
     - name: Configure
       run: |
-        mkdir -p build
+        mkdir build
         cd build
-        cmake ../CPP_APP  # This correctly points to the CPP_APP directory containing CMakeLists.txt
+        cmake ..  # Assuming your CMakeLists.txt is in the root directory
 
     - name: Build
       run: |
         cd build
-        make  # Assumes that make is configured in your CMakeLists.txt
+        make  # Adjust this if you have a different build command
 
     - name: Run tests
       run: |
         cd build
-        ./tests/tests_app  # Replace 'tests_app' with the actual name of your test executable if it's different
+        ./test_app  # Replace 'test_app' with the name of your test executable
