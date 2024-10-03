@@ -1,35 +1,29 @@
 name: C/C++ CI
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Create build directory
+        run: mkdir -p .CPP_APP/build
 
-    - name: Install dependencies
-      run: sudo apt-get install -y g++ cmake
+      - name: Configure CMake
+        run: |
+          cd .CPP_APP/build
+          cmake .. # This assumes CMakeLists.txt is in .CPP_APP
 
-    - name: Create build directory
-      run: mkdir -p .CPP_APP/build
+      - name: Build
+        run: |
+          cd .CPP_APP/build
+          make
 
-    - name: Configure
-      run: |
-        cd .CPP_APP/build
-        cmake ..  # This now correctly points to the CMakeLists.txt in the .CPP_APP directory
-
-    - name: Build
-      run: |
-        cd .CPP_APP/build
-        make  # Assumes that make is configured in your CMakeLists.txt
-
-    - name: Run tests
-      run: |
-        cd .CPP_APP/build
-        ./tests/tests_app  # Replace 'tests_app' with the actual name of your test executable if it's different
+      - name: Run tests
+        run: |
+          cd .CPP_APP/build
+          ./tests/tests_app
