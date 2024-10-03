@@ -1,8 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
-project(SimpleApp)
+project(MyCppProject)
 
-# Set C++ standard
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)  # or 11, 17, etc., depending on your needs
 
-# Add the source files
-add_executable(test_app tests/test_app.cpp)
+# Add your source files
+add_executable(test_app main.cpp addition.cpp)  # Replace with your actual source files
+
+# If you have tests, you can set them up here
+enable_testing()
+add_test(NAME MyTests COMMAND test_app)  # Adjust this as needed
