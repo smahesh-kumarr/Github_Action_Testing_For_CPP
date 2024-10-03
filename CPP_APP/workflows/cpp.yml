@@ -20,7 +20,7 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        cmake ../.CPP_APP  # This points to the directory containing CMakeLists.txt
+        cmake ../CPP_APP  # This correctly points to the CPP_APP directory containing CMakeLists.txt
 
     - name: Build
       run: |
