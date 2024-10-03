@@ -1,6 +1,6 @@
 // tests/test_app.cpp
 #include <cassert>
-#include "../src/app.cpp"
+#include "../src/addition.cpp"
 
 void test_add() {
     assert(add(1, 2) == 3);
