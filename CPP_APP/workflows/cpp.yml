@@ -1,29 +1,33 @@
-name: C++ Build and Test
+name: C/C++ CI
 
-on: [push]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        compiler: [g++]
-
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Install dependencies
       run: sudo apt-get install -y g++ cmake
 
-    - name: Configure and Build
+    - name: Configure
       run: |
         mkdir build
         cd build
-        cmake ..
-        make
+        cmake ../src  # Adjust path based on where your CMakeLists.txt is located
+
+    - name: Build
+      run: |
+        cd build
+        make  # Adjust this if you have a different build command
 
     - name: Run tests
       run: |
         cd build
-        ./test_app
+        ./test_app  # Replace 'test_app' with the name of your test executable
