@@ -11,23 +11,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
     - name: Install dependencies
       run: sudo apt-get install -y g++ cmake
 
     - name: Configure
       run: |
-        mkdir -p build
-        cd build
-        cmake ../CPP_APP  # This correctly points to the CPP_APP directory containing CMakeLists.txt
+        mkdir -p .CPP_APP/build
+        cd .CPP_APP/build
+        cmake ..  # This points to the CMakeLists.txt in the .CPP_APP directory
 
     - name: Build
       run: |
-        cd build
+        cd .CPP_APP/build
         make  # Assumes that make is configured in your CMakeLists.txt
 
     - name: Run tests
       run: |
-        cd build
-        ./tests/tests_app  # Replace 'tests_app' with the actual name of your test executable if it's different
+        cd .CPP_APP/build
+        ./tests/tests_app  # Ensure 'tests_app' is the actual name of your test executable
